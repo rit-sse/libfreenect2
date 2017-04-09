@@ -377,16 +377,16 @@ int main(int argc, char *argv[])
 #ifdef EXAMPLES_WITH_OPENGL_SUPPORT
     if (enable_rgb)
     {
-      viewer.addFrame("RGB", rgb);
+      //    viewer.addFrame("RGB", rgb);
     }
     if (enable_depth)
     {
-      viewer.addFrame("ir", ir);
-      viewer.addFrame("depth", depth);
+      // viewer.addFrame("ir", ir);
+      viewer.addFrame("RGB", depth);
     }
     if (enable_rgb && enable_depth)
     {
-      viewer.addFrame("registered", &registered);
+      // viewer.addFrame("registered", &registered);
     }
 
     protonect_shutdown = protonect_shutdown || viewer.render();
