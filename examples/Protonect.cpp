@@ -181,12 +181,10 @@ int main(int argc, char *argv[]) {
     size_t top_wall;
     size_t bottom_wall;
 
-    //char test[4] = {'1','a','b','c'};
-    //float testfloat = atof(test);
-    //printf("this is the test: %f \n",testfloat);
-
-    float center_value = atof(reinterpret_cast<const char*>(&depth->data[center_of_box]));
-    printf("%f\n", center_value);
+    int sizeofdata = (sizeof(depth->data) / sizeof(depth->data[0]));
+		printf("size of the data array = %d \n",sizeofdata);
+		
+    //printf("%f\n", center_value);
 
     /*
     // Find left wall
