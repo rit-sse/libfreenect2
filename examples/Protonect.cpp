@@ -2,14 +2,11 @@
  * This file is part of the OpenKinect Project. http://www.openkinect.org
  *
  * Copyright (c) 2011 individual OpenKinect contributors. See the CONTRIB file
- * for details.
- *
- * This code is licensed to you under the terms of the Apache License, version
+ * for details.  This code is licensed to you under the terms of the Apache License, version
  * 2.0, or, at your option, the terms of the GNU General Public License,
  * version 2.0. See the APACHE20 and GPL2 files for the text of the licenses,
  * or the following URLs:
- * http://www.apache.org/licenses/LICENSE-2.0
- * http://www.gnu.org/licenses/gpl-2.0.txt
+ * http://www.apache.org/licenses/LICENSE-2.0 http://www.gnu.org/licenses/gpl-2.0.txt
  *
  * If you redistribute this file in source form, modified or unmodified, you
  * may:
@@ -116,11 +113,6 @@ int main(int argc, char *argv[]) {
 
   std::string serial = "";
 
-  bool enable_rgb = true;
-  bool enable_depth = true;
-  int deviceId = -1;
-  size_t framemax = -1;
-
   // Find the device
   // Some time dosn't work the frist time
   if(freenect2.enumerateDevices() == 0) {
@@ -174,14 +166,67 @@ int main(int argc, char *argv[]) {
       std::cout << "timeout!" << std::endl;
       return -1;
     }
+
+    // Frames
     libfreenect2::Frame *rgb = frames[libfreenect2::Frame::Color];
     libfreenect2::Frame *ir = frames[libfreenect2::Frame::Ir];
     libfreenect2::Frame *depth = frames[libfreenect2::Frame::Depth];
 
+    // The amount of liway
+    float give = 40;
+    size_t center_of_box = (depth->width * depth->height * 4) / 2;
 
+    size_t left_wall;
+    size_t right_wall;
+    size_t top_wall;
+    size_t bottom_wall;
+
+    //char test[4] = {'1','a','b','c'};
+    //float testfloat = atof(test);
+    //printf("this is the test: %f \n",testfloat);
+
+    float center_value = atof(reinterpret_cast<const char*>(&depth->data[center_of_box]));
+    printf("%f\n", center_value);
+
+    /*
+    // Find left wall
+    for (size_t i = center_of_box; i > (center_of_box - (depth->width / 2) + 1); i--) {
+      if(depth->data[i] > center_value) {
+        left_wall = (depth->width / 2) - (center_of_box - i);
+        break;
+      }
+    }
+    // Find right wall
+    for (size_t i = center_of_box; i < (center_of_box + (depth->width / 2) - 1); i++) {
+      if( depth->data[i] > center_value) {
+        right_wall = (depth->width / 2) + (i - center_of_box);
+        break;
+      }
+    }
+    */
+    /*
+    // Find top wall
+    for (size_t i = center_of_box; i < (center_of_box - (depth->height / 2)); i-=depth->width) {
+      if( depth->data[i] > center_high) {
+        top_wall = (center_of_box - i) / depth->width;
+        break;
+      }
+    }
+    // Find bottom wall
+    for (size_t i = center_of_box; i < (center_of_box + (depth->height / 2)); i+=depth->width) {
+      if( depth->data[i] > center_high) {
+        bottom_wall = (i + center_of_box) / depth->width;
+        break;
+      }
+    }
+    */
+
+    // printf("Width: %zu Height %zu Center: %zu Left: %zu Right: %zu\n", depth->width, depth->height, center_of_box, left_wall, right_wall);
+
+    // libfreenect2::Frame boxFrame(depth->width, depth->height, 1, box);
 
     viewer.addFrame("depth", depth);
-    // viewer.addFrame("RGB", rgb);
+    // viewer.addFrame("RGB", &boxFrame);
     // viewer.addFrame("ir", ir);
     // viewer.addFrame("registered", &registered);
 
