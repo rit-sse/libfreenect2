@@ -173,94 +173,90 @@ int main(int argc, char *argv[]) {
     libfreenect2::Frame *ir = frames[libfreenect2::Frame::Ir];
     libfreenect2::Frame *depth = frames[libfreenect2::Frame::Depth];
 
-    // The amount of liway
+    float* frame_data = (float*)depth->data;
+
+    // The amount of variance to ignore in height
     float give = 40;
-    size_t center_of_box = (depth->width * depth->height) / 2;
+    int variance = 4;
+
+    float pre_avg = 0;
+    float average = 0;
+    int counter = 0;
+    int missed = 0;
+
+    // this is the bottom right of the square of the center box
+    size_t center_of_box = (((depth->width * depth->height) / 2) + (depth->width / 2));
+
+    for(size_t x = (center_of_box - variance); x < (center_of_box + variance); x++) {
+      for(size_t y = (x - (depth->width * variance)); y < (x + (depth->width * variance)); y+= depth->width) {
+        counter++;
+        if(frame_data[y] != 0) {
+          pre_avg += frame_data[y];
+        } else {
+          missed ++;
+        }
+      }
+    }
+
+    average = (pre_avg / (counter - missed)); // Average Center Value
+
+    float center_value = average - give;
 
     size_t left_wall_cord = 0;
     size_t right_wall_cord = 0;
     size_t top_wall_cord = 0;
     size_t bottom_wall_cord = 0;
-    
-    float* frame_data = (float*)depth->data;
 
-    float pre_avg = 0;
-    int missed = 0;
-    int variance = 4;
-    int counter = 0;
-    for(int x = (center_of_box - variance); x < (center_of_box + variance); x++){
-      for(int y = (x - (depth->width * variance)); y < (x + (depth->width * variance)); y+= depth->width)
-      {
-        counter++;
-        if(frame_data[y] != 0){
-          //printf("%f \n", frame_data[y]);
-          pre_avg += frame_data[y];
-        }
-        else
-        {
-          missed ++;
-        }
-      }
-    }
-    //printf("counter = %d \n", counter);
-    //printf("missed: %d \n", missed);
-    float center_value_no_give = (pre_avg / (counter - missed));
-    float center_value = center_value_no_give + give;
     float left_wall_value = 0;
     float right_wall_value = 0;
+    float top_wall_value = 0;
+    float bottom_wall_value = 0;
 
     // Find left wall
-    for (int i = center_of_box; i > (center_of_box - (depth->width / 2) + 1); i--) {
-      if(frame_data[i] == 0)
-      {
-        //printf("skip frame...");
-        continue;
-      }
-      if(frame_data[i] > center_value) {
-        left_wall_cord = center_of_box - (center_of_box - i);
-        left_wall_value = frame_data[i];
-        //printf("left wall found, value edited \n");
-        break;
-      } 
-    }
-    // Find right wall
-    for (int i = center_of_box; i < (center_of_box + (depth->width / 2) - 1); i++) {
-      if(frame_data[i] == 0)
-      {
-        //printf("skip frame...");
-        continue;
-      }
-      if( frame_data[i] > center_value) {
-        right_wall_cord = center_of_box + (i - center_of_box); 
-        right_wall_value = frame_data[i];
-        //printf("right wall found, value edited \n");
+    for (size_t i = center_of_box; i > (center_of_box - (depth->width / 2)); i--) {
+      if(average != 0 && frame_data[i] < center_value) {
+        left_wall_cord = (depth->width / 2) + 1 - (center_of_box - i); // Always add one because its square
+        left_wall_value = average;
+        printf("Found left wall: %f, %zu\n", left_wall_value, left_wall_cord);
         break;
       }
     }
 
+    // Find right wall
+    for (size_t i = center_of_box; i < ((center_of_box + (depth->width / 2)) - 1); i++) { // we are at middle right so subtract 1
+      if(frame_data[i] != 0 && frame_data[i] < center_value) {
+        right_wall_cord = (depth->width / 2) + 1 + (i - center_of_box); // Always add one because its square
+        right_wall_value = frame_data[i];
+        printf("Found right wall: %f, %zu\n", right_wall_value, right_wall_cord);
+        break;
+      }
+    }
+
+    // Find top wall
+    // Top is the bottom but that makes me confused so this is the top wall
+    for (size_t i = center_of_box; i > (center_of_box - (depth->width * (depth->height / 2))); i-= depth->width) {
+      if(frame_data[i] != 0 && frame_data[i] < center_value) {
+        top_wall_cord = ((center_of_box - i) / depth->width);
+        top_wall_value = frame_data[i];
+        printf("Found top wall: %f, %zu\n", top_wall_value, top_wall_cord);
+        break;
+      }
+    }
+
+    // Find bottom wall
+    for (size_t i = center_of_box; i < (center_of_box + (depth->width * ((depth->height / 2) - 1))); i+= depth->width) {
+      if(frame_data[i] != 0 && frame_data[i] < center_value) {
+        bottom_wall_cord = (depth->height / 2) + 1 + ((i - center_of_box) / depth->width); // Magical + 1
+        bottom_wall_value = frame_data[i];
+        printf("Found bottom wall: %f, %zu\n", bottom_wall_value, bottom_wall_cord);
+        break;
+      }
+    }
 
     /*
-    // Find top wall
-    for (size_t i = center_of_box; i < (center_of_box - (depth->height / 2)); i-=depth->width) {
-      if( depth->data[i] > center_high) {
-        top_wall = (center_of_box - i) / depth->width;
-        break;
-      }
-    }
-    // Find bottom wall
-    for (size_t i = center_of_box; i < (center_of_box + (depth->height / 2)); i+=depth->width) {
-      if( depth->data[i] > center_high) {
-        bottom_wall = (i + center_of_box) / depth->width;
-        break;
-      }
-    }
-    */
-
-    if (left_wall_value != 0){
-      //printf("Width: %zu Height: %zu \n", depth->width, depth->height);
-      printf("Center_value: %f Left_value: %f Right_value: %f\n", center_value_no_give, left_wall_value, right_wall_value);
-      printf("Center_cord: %zu, Left_cord: %zu, right_cord: %zu \n\n\n", center_of_box, left_wall_cord, right_wall_cord);
-    }
+       printf("Center_value: %f Left_value: %f Right_value: %f\n", center_value_no_give, left_wall_value, right_wall_value);
+       printf("Center_cord: %zu, Left_cord: %zu, right_cord: %zu \n\n\n", center_of_box, left_wall_cord, right_wall_cord);
+       */
 
     viewer.addFrame("depth", depth);
     // viewer.addFrame("RGB", &boxFrame);
