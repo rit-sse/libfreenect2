@@ -7,7 +7,7 @@
 #include <string>
 #include <map>
 
-#include "flextGL.h"
+#include "../src/flextGL.h"
 #include <GLFW/glfw3.h>
 
 struct Vertex
