@@ -1,7 +1,5 @@
 /*
- * This file is part of the OpenKinect Project. http://www.openkinect.org
- *
- * Copyright (c) 2011 individual OpenKinect contributors. See the CONTRIB file
+ * This file is part of the OpenKinect Project. http://www.openkinect.org Copyright (c) 2011 individual OpenKinect contributors. See the CONTRIB file
  * for details.  This code is licensed to you under the terms of the Apache License, version
  * 2.0, or, at your option, the terms of the GNU General Public License,
  * version 2.0. See the APACHE20 and GPL2 files for the text of the licenses,
@@ -217,7 +215,6 @@ int main(int argc, char *argv[]) {
       if(average != 0 && frame_data[i] < center_value) {
         left_wall_cord = (depth->width / 2) + 1 - (center_of_box - i); // Always add one because its square
         left_wall_value = average;
-        printf("Found left wall: %f, %zu\n", left_wall_value, left_wall_cord);
         break;
       }
     }
@@ -227,7 +224,6 @@ int main(int argc, char *argv[]) {
       if(frame_data[i] != 0 && frame_data[i] < center_value) {
         right_wall_cord = (depth->width / 2) + 1 + (i - center_of_box); // Always add one because its square
         right_wall_value = frame_data[i];
-        printf("Found right wall: %f, %zu\n", right_wall_value, right_wall_cord);
         break;
       }
     }
@@ -236,9 +232,8 @@ int main(int argc, char *argv[]) {
     // Top is the bottom but that makes me confused so this is the top wall
     for (size_t i = center_of_box; i > (center_of_box - (depth->width * (depth->height / 2))); i-= depth->width) {
       if(frame_data[i] != 0 && frame_data[i] < center_value) {
-        top_wall_cord = ((center_of_box - i) / depth->width);
+        top_wall_cord = (depth->height / 2) - ((center_of_box - i) / depth->width);
         top_wall_value = frame_data[i];
-        printf("Found top wall: %f, %zu\n", top_wall_value, top_wall_cord);
         break;
       }
     }
@@ -248,15 +243,17 @@ int main(int argc, char *argv[]) {
       if(frame_data[i] != 0 && frame_data[i] < center_value) {
         bottom_wall_cord = (depth->height / 2) + 1 + ((i - center_of_box) / depth->width); // Magical + 1
         bottom_wall_value = frame_data[i];
-        printf("Found bottom wall: %f, %zu\n", bottom_wall_value, bottom_wall_cord);
         break;
       }
     }
 
-    /*
-       printf("Center_value: %f Left_value: %f Right_value: %f\n", center_value_no_give, left_wall_value, right_wall_value);
-       printf("Center_cord: %zu, Left_cord: %zu, right_cord: %zu \n\n\n", center_of_box, left_wall_cord, right_wall_cord);
-       */
+    if (left_wall_cord && right_wall_cord && top_wall_cord && bottom_wall_cord) {
+      for (size_t i = ((top_wall_cord + 1) * depth->width); i < (bottom_wall_cord * depth->width); i+= depth->width) {
+        for (size_t j = left_wall_cord + 1; j < right_wall_cord; j++) {
+          frame_data[i + j] = 100;
+        }
+      }
+    }
 
     viewer.addFrame("depth", depth);
     // viewer.addFrame("RGB", &boxFrame);
