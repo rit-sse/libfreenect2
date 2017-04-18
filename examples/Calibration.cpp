@@ -82,6 +82,7 @@ void Calibrator::calibrate(libfreenect2::Frame *depth) {
     }
   }
 
+  printf("Center Value %f\n", center_value);
   printf("L: %zu R: %zu T: %zu B: %zu\n", left_wall, right_wall, top_wall, bottom_wall);
 }
 
@@ -99,4 +100,26 @@ bool Calibrator::showCalibrationSquare(libfreenect2::Frame *depth) {
   // viewer.addFrame("registered", &registered);
 
   return false || viewer.render();
+}
+
+BoxFrame Calibrator::getBoxesDepthMap(libfreenect2::Frame *depth) {
+  frame_data = (float *)depth->data;
+
+  float *data = (float *)malloc(4 * (right_wall - left_wall) * (bottom_wall - top_wall));
+
+  for (size_t i = ((top_wall + 1) * depth->width); i < (bottom_wall * depth->width); i+= depth->width) {
+    for (size_t j = left_wall + 1; j < right_wall; j++) {
+      *data = frame_data[i + j];
+      data++;
+    }
+  }
+
+  BoxFrame boxFrame((right_wall - left_wall), (bottom_wall - top_wall), data);
+  return boxFrame;
+}
+
+BoxFrame::BoxFrame(size_t w, size_t h, float *d) {
+  width = w;
+  height = h;
+  data = d;
 }
