@@ -31,7 +31,7 @@
 #include <libfreenect2/logger.h>
 #include "viewer.h"
 #include "Calibration.h"
-// Whether the running application should shut down. 
+// Whether the running application should shut down.
 
 bool protonect_shutdown = false;
 
@@ -155,9 +155,9 @@ int main(int argc, char *argv[]) {
   std::cout << "device firmware: " << dev->getFirmwareVersion() << std::endl;
 
 
-  Calibrator calibrator(true);
+  Calibrator calibrator(false);
 
-  while(!protonect_shutdown) {
+  while(!protonect_shutdown && !calibrator.calibrated()) {
     if (!listener.waitForNewFrame(frames, 10*1000)) {
       std::cout << "timeout!" << std::endl;
       return -1;
@@ -165,9 +165,38 @@ int main(int argc, char *argv[]) {
 
     libfreenect2::Frame *depth = frames[libfreenect2::Frame::Depth];
 
-    protonect_shutdown = protonect_shutdown || calibrator.showCalibrationSquare(depth);
+    calibrator.calibrate(depth);
 
-    // Call this when we are done with the frame
+    listener.release(frames);
+  }
+
+  Viewer viewer;
+  viewer.initialize();
+
+  libfreenect2::Frame red(1920, 1080, 4, NULL);
+  unsigned int *frame_data = (unsigned int*)red.data;
+
+  size_t center_red = ((1920 * 1080) / 2) + (1920 / 2);
+  size_t red_size = 32;
+
+  for(size_t x = (center_red - red_size); x < (center_red + red_size); x++) {
+    for(size_t y = (x - (1920 * red_size)); y < (x + (1920 * red_size)); y+= 1920) {
+      frame_data[y] = 0x00FF0000;
+    }
+  }
+
+  while(!protonect_shutdown) {
+    if (!listener.waitForNewFrame(frames, 10*1000)) {
+      std::cout << "timeout!" << std::endl;
+      return -1;
+    }
+
+    libfreenect2::Frame *color = frames[libfreenect2::Frame::Color];
+
+    viewer.addFrame("RGB", &red);
+
+    protonect_shutdown = protonect_shutdown || viewer.render();
+
     listener.release(frames);
   }
 

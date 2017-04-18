@@ -82,7 +82,6 @@ void Calibrator::calibrate(libfreenect2::Frame *depth) {
     }
   }
 
-  printf("Center Value %f\n", center_value);
   printf("L: %zu R: %zu T: %zu B: %zu\n", left_wall, right_wall, top_wall, bottom_wall);
 }
 
