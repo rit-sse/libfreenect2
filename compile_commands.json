@@ -1,0 +1,132 @@
+[
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG   -o CMakeFiles/generate_resources_tool.dir/tools/generate_resources.cpp.o -c /home/dylan/sandbox/libfreenect2/tools/generate_resources.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/tools/generate_resources.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/transfer_pool.cpp.o -c /home/dylan/sandbox/libfreenect2/src/transfer_pool.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/transfer_pool.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/event_loop.cpp.o -c /home/dylan/sandbox/libfreenect2/src/event_loop.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/event_loop.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/usb_control.cpp.o -c /home/dylan/sandbox/libfreenect2/src/usb_control.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/usb_control.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/allocator.cpp.o -c /home/dylan/sandbox/libfreenect2/src/allocator.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/allocator.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/frame_listener_impl.cpp.o -c /home/dylan/sandbox/libfreenect2/src/frame_listener_impl.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/frame_listener_impl.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/packet_pipeline.cpp.o -c /home/dylan/sandbox/libfreenect2/src/packet_pipeline.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/packet_pipeline.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/rgb_packet_stream_parser.cpp.o -c /home/dylan/sandbox/libfreenect2/src/rgb_packet_stream_parser.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/rgb_packet_stream_parser.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/rgb_packet_processor.cpp.o -c /home/dylan/sandbox/libfreenect2/src/rgb_packet_processor.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/rgb_packet_processor.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/depth_packet_stream_parser.cpp.o -c /home/dylan/sandbox/libfreenect2/src/depth_packet_stream_parser.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/depth_packet_stream_parser.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/depth_packet_processor.cpp.o -c /home/dylan/sandbox/libfreenect2/src/depth_packet_processor.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/depth_packet_processor.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/cpu_depth_packet_processor.cpp.o -c /home/dylan/sandbox/libfreenect2/src/cpu_depth_packet_processor.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/cpu_depth_packet_processor.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/resource.cpp.o -c /home/dylan/sandbox/libfreenect2/src/resource.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/resource.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/command_transaction.cpp.o -c /home/dylan/sandbox/libfreenect2/src/command_transaction.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/command_transaction.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/registration.cpp.o -c /home/dylan/sandbox/libfreenect2/src/registration.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/registration.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/logging.cpp.o -c /home/dylan/sandbox/libfreenect2/src/logging.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/logging.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/libfreenect2.cpp.o -c /home/dylan/sandbox/libfreenect2/src/libfreenect2.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/libfreenect2.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/tinythread/tinythread.cpp.o -c /home/dylan/sandbox/libfreenect2/src/tinythread/tinythread.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/tinythread/tinythread.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/turbo_jpeg_rgb_packet_processor.cpp.o -c /home/dylan/sandbox/libfreenect2/src/turbo_jpeg_rgb_packet_processor.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/turbo_jpeg_rgb_packet_processor.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/flextGL.cpp.o -c /home/dylan/sandbox/libfreenect2/src/flextGL.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/flextGL.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/opengl_depth_packet_processor.cpp.o -c /home/dylan/sandbox/libfreenect2/src/opengl_depth_packet_processor.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/opengl_depth_packet_processor.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/opencl_depth_packet_processor.cpp.o -c /home/dylan/sandbox/libfreenect2/src/opencl_depth_packet_processor.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/opencl_depth_packet_processor.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build",
+  "command": "/usr/bin/c++   -DRESOURCES_INC -Dfreenect2_EXPORTS -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0   -Wall -fno-exceptions -O2 -g -DNDEBUG -fPIC -fvisibility=hidden -fvisibility-inlines-hidden   -o CMakeFiles/freenect2.dir/src/opencl_kde_depth_packet_processor.cpp.o -c /home/dylan/sandbox/libfreenect2/src/opencl_kde_depth_packet_processor.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/opencl_kde_depth_packet_processor.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build/examples",
+  "command": "/usr/bin/c++   -DEXAMPLES_WITH_OPENGL_SUPPORT=1 -DRESOURCES_INC -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0 -I/home/dylan/sandbox/libfreenect2/examples/../src   -Wall -fno-exceptions -O2 -g -DNDEBUG   -o CMakeFiles/Protonect.dir/Protonect.cpp.o -c /home/dylan/sandbox/libfreenect2/examples/Protonect.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/examples/Protonect.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build/examples",
+  "command": "/usr/bin/c++   -DEXAMPLES_WITH_OPENGL_SUPPORT=1 -DRESOURCES_INC -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0 -I/home/dylan/sandbox/libfreenect2/examples/../src   -Wall -fno-exceptions -O2 -g -DNDEBUG   -o CMakeFiles/Protonect.dir/viewer.cpp.o -c /home/dylan/sandbox/libfreenect2/examples/viewer.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/examples/viewer.cpp"
+},
+{
+  "directory": "/home/dylan/sandbox/libfreenect2/build/examples",
+  "command": "/usr/bin/c++   -DEXAMPLES_WITH_OPENGL_SUPPORT=1 -DRESOURCES_INC -I/home/dylan/sandbox/libfreenect2/include -I/home/dylan/sandbox/libfreenect2/include/internal -I/home/dylan/sandbox/libfreenect2/build -I/home/dylan/sandbox/libfreenect2/src/tinythread -I/usr/include/libusb-1.0 -I/home/dylan/sandbox/libfreenect2/examples/../src   -Wall -fno-exceptions -O2 -g -DNDEBUG   -o CMakeFiles/Protonect.dir/__/src/flextGL.cpp.o -c /home/dylan/sandbox/libfreenect2/src/flextGL.cpp",
+  "file": "/home/dylan/sandbox/libfreenect2/src/flextGL.cpp"
+}
+]

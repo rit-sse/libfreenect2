@@ -63,6 +63,7 @@ IF(ENABLE_OPENGL)
     LIST(APPEND Protonect_DLLS ${GLFW3_DLL})
     LIST(APPEND Protonect_src
       viewer.cpp
+      Calibration.cpp
       ${flextGL_SOURCES}
     )
     LIST(APPEND Protonect_LIBRARIES
