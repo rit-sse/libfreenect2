@@ -102,7 +102,7 @@ bool Calibrator::showCalibrationSquare(libfreenect2::Frame *depth) {
   return false || viewer.render();
 }
 
-BoxFrame Calibrator::getBoxesDepthMap(libfreenect2::Frame *depth) {
+void Calibrator::getBoxesDepthMap(BoxFrame* boxframe, libfreenect2::Frame *depth) {
   frame_data = (float *)depth->data;
 
   float *data = (float *)malloc(4 * (right_wall - left_wall) * (bottom_wall - top_wall));
@@ -114,12 +114,23 @@ BoxFrame Calibrator::getBoxesDepthMap(libfreenect2::Frame *depth) {
     }
   }
 
-  BoxFrame boxFrame((right_wall - left_wall), (bottom_wall - top_wall), data);
-  return boxFrame;
+  boxFrame.initalize((right_wall - left_wall), (bottom_wall - top_wall), data);
+}
+
+BoxFrame::BoxFram(){
+	width = 0;
+	height = 0;
 }
 
 BoxFrame::BoxFrame(size_t w, size_t h, float *d) {
   width = w;
   height = h;
   data = d;
+}
+
+void BoxFrame::initalize(size_t w, size_t h, float* d)
+{
+	this->width = w;
+	this->height = h;
+	this->data = d;
 }

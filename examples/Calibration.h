@@ -7,10 +7,12 @@
 
 class BoxFrame {
   public:
+		BoxFrame();
     BoxFrame(size_t width, size_t height, float *data);
     size_t width;
     size_t height;
     float *data;
+		void initialize(size_t width, size_t height, float* data);
 };
 
 class Calibrator {
@@ -36,6 +38,6 @@ class Calibrator {
     bool calibrated();
     void calibrate(libfreenect2::Frame *depth);
     bool showCalibrationSquare(libfreenect2::Frame *depth);
-    BoxFrame getBoxesDepthMap(libfreenect2::Frame *depth);
+    void getBoxesDepthMap(BoxFrame* boxframe, libfreenect2::Frame *depth);
 };
 #endif
