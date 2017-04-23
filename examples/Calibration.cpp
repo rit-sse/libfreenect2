@@ -133,7 +133,11 @@ void BoxFrame::initialize(size_t w, size_t h, float* d) {
 	this->data = d;
 }
 
-RedSquare::RedSquare(unsigned int *fd) {
+RedSquare::RedSquare(size_t l, size_t r, size_t t, size_t b, unsigned int *fd) {
+  leftWall = l;
+  rightWall = r;
+  topWall = t;
+  bottomWall = b;
   frame_data = fd;
 }
 
@@ -156,30 +160,30 @@ void RedSquare::drawSquare() {
   draw();
 }
 
-bool RedSquare::moveLeft() {
+bool RedSquare::moveLeft(libfreenect2::Frame *color) {
+  if (leftPos == 0) return false;
   leftPos--;
   draw();
-  if (leftPos == 0) return false;
   return true;
 }
 
-bool RedSquare::moveRight() {
-  rightPos--;
-  draw();
+bool RedSquare::moveRight(libfreenect2::Frame *color) {
   if (rightPos == width) return false;
+  rightPos++;
+  draw();
   return true;
 }
 
-bool RedSquare::moveUp() {
+bool RedSquare::moveUp(libfreenect2::Frame *color) {
+  if (topPos == 0) return false;
   topPos--;
   draw();
-  if (topPos == 0) return false;
   return true;
 }
 
-bool RedSquare::moveDown() {
-  bottomPos--;
-  draw();
+bool RedSquare::moveDown(libfreenect2::Frame *color) {
   if (bottomPos == height) return false;
+  bottomPos++;
+  draw();
   return true;
 }

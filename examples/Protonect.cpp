@@ -157,13 +157,15 @@ int main(int argc, char *argv[]) {
 
   Calibrator calibrator(false);
 
+  libfreenect2::Frame *depth;
+
   while(!protonect_shutdown && !calibrator.calibrated()) {
     if (!listener.waitForNewFrame(frames, 10*1000)) {
       std::cout << "timeout!" << std::endl;
       return -1;
     }
 
-    libfreenect2::Frame *depth = frames[libfreenect2::Frame::Depth];
+    depth = frames[libfreenect2::Frame::Depth];
 
     calibrator.calibrate(depth);
 
@@ -176,42 +178,46 @@ int main(int argc, char *argv[]) {
   libfreenect2::Frame red(1920, 1080, 4, NULL);
   unsigned int *frame_data = (unsigned int*)red.data;
 
-  RedSquare redSquare(frame_data);
+  size_t wConst = 1920 / 512;
+  size_t hConst = 1080 / 424;
+
+  RedSquare redSquare(
+      calibrator.left_wall * wConst,
+      calibrator.right_wall * wConst,
+      calibrator.top_wall * hConst,
+      calibrator.bottom_wall * hConst,
+      frame_data);
 
   redSquare.drawSquare();
 
-  while(redSquare.moveLeft()) {
-    viewer.addFrame("RGB", &red);
-    protonect_shutdown = protonect_shutdown || viewer.render();
-  }
+  viewer.addFrame("RGB", &red);
 
-  while(redSquare.moveRight()) {
-    viewer.addFrame("RGB", &red);
-    protonect_shutdown = protonect_shutdown || viewer.render();
-  }
+  protonect_shutdown = protonect_shutdown || viewer.render();
 
-  while(redSquare.moveUp()) {
-    viewer.addFrame("RGB", &red);
-    protonect_shutdown = protonect_shutdown || viewer.render();
-  }
+  libfreenect2::Frame *color;
 
-  while(redSquare.moveDown()) {
-    viewer.addFrame("RGB", &red);
-    protonect_shutdown = protonect_shutdown || viewer.render();
-  }
-
-  /*
   while(!protonect_shutdown) {
     if (!listener.waitForNewFrame(frames, 10*1000)) {
       std::cout << "timeout!" << std::endl;
       return -1;
     }
 
-    libfreenect2::Frame *color = frames[libfreenect2::Frame::Color];
+    color = frames[libfreenect2::Frame::Color];
 
+    if (redSquare.moveLeft(color) || redSquare.moveRight(color) || redSquare.moveUp(color) || redSquare.moveDown(color)) {
+      viewer.addFrame("RGB", &red);
+      protonect_shutdown = protonect_shutdown || viewer.render();
+      listener.release(frames);
+      continue;
+    }
+
+    viewer.addFrame("RGB", &red);
+    protonect_shutdown = protonect_shutdown || viewer.render();
     listener.release(frames);
+    break;
   }
-  */
+
+  printf("L: %zu R: %zu T: %zu B: %zu", redSquare.leftPos, redSquare.rightPos, redSquare.topPos, redSquare.bottomPos);
 
   dev->stop();
   dev->close();
