@@ -176,15 +176,31 @@ int main(int argc, char *argv[]) {
   libfreenect2::Frame red(1920, 1080, 4, NULL);
   unsigned int *frame_data = (unsigned int*)red.data;
 
-  size_t center_red = ((1920 * 1080) / 2) + (1920 / 2);
-  size_t red_size = 32;
+  RedSquare redSquare(frame_data);
 
-  for(size_t x = (center_red - red_size); x < (center_red + red_size); x++) {
-    for(size_t y = (x - (1920 * red_size)); y < (x + (1920 * red_size)); y+= 1920) {
-      frame_data[y] = 0x00FF0000;
-    }
+  redSquare.drawSquare();
+
+  while(redSquare.moveLeft()) {
+    viewer.addFrame("RGB", &red);
+    protonect_shutdown = protonect_shutdown || viewer.render();
   }
 
+  while(redSquare.moveRight()) {
+    viewer.addFrame("RGB", &red);
+    protonect_shutdown = protonect_shutdown || viewer.render();
+  }
+
+  while(redSquare.moveUp()) {
+    viewer.addFrame("RGB", &red);
+    protonect_shutdown = protonect_shutdown || viewer.render();
+  }
+
+  while(redSquare.moveDown()) {
+    viewer.addFrame("RGB", &red);
+    protonect_shutdown = protonect_shutdown || viewer.render();
+  }
+
+  /*
   while(!protonect_shutdown) {
     if (!listener.waitForNewFrame(frames, 10*1000)) {
       std::cout << "timeout!" << std::endl;
@@ -193,12 +209,9 @@ int main(int argc, char *argv[]) {
 
     libfreenect2::Frame *color = frames[libfreenect2::Frame::Color];
 
-    viewer.addFrame("RGB", &red);
-
-    protonect_shutdown = protonect_shutdown || viewer.render();
-
     listener.release(frames);
   }
+  */
 
   dev->stop();
   dev->close();

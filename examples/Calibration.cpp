@@ -132,3 +132,54 @@ void BoxFrame::initialize(size_t w, size_t h, float* d) {
 	this->height = h;
 	this->data = d;
 }
+
+RedSquare::RedSquare(unsigned int *fd) {
+  frame_data = fd;
+}
+
+void RedSquare::draw() {
+  for (size_t i = ((topPos + 1) * width); i < (bottomPos * width); i+= width) {
+    for (size_t j = leftPos + 1; j < rightPos; j++) {
+      frame_data[i + j] = 0x00FF0000;
+    }
+  }
+}
+
+void RedSquare::drawSquare() {
+  size_t red_size = 32;
+
+  leftPos = (width / 2) - red_size;
+  rightPos = (width / 2) + (red_size - 1);
+  topPos = (height / 2) - red_size;
+  bottomPos = (height / 2) + (red_size - 1);
+
+  draw();
+}
+
+bool RedSquare::moveLeft() {
+  leftPos--;
+  draw();
+  if (leftPos == 0) return false;
+  return true;
+}
+
+bool RedSquare::moveRight() {
+  rightPos--;
+  draw();
+  if (rightPos == width) return false;
+  return true;
+}
+
+bool RedSquare::moveUp() {
+  topPos--;
+  draw();
+  if (topPos == 0) return false;
+  return true;
+}
+
+bool RedSquare::moveDown() {
+  bottomPos--;
+  draw();
+  if (bottomPos == height) return false;
+  return true;
+}

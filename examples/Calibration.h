@@ -15,6 +15,25 @@ class BoxFrame {
 		void initialize(size_t width, size_t height, float* data);
 };
 
+class RedSquare {
+  unsigned int *frame_data;
+  size_t leftPos;
+  size_t rightPos;
+  size_t topPos;
+  size_t bottomPos;
+  static const size_t width = 1920;
+  static const size_t height = 1080;
+
+  public:
+    void draw();
+    void drawSquare();
+    bool moveLeft();
+    bool moveRight();
+    bool moveUp();
+    bool moveDown();
+    RedSquare(unsigned int *fd);
+};
+
 class Calibrator {
   Viewer viewer;
   bool showViewer;
