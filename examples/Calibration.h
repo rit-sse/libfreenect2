@@ -5,6 +5,8 @@
 #include "viewer.h"
 #include <cstdlib>
 
+bool isRed(unsigned int pixel);
+
 class BoxFrame {
   public:
     BoxFrame();
@@ -18,6 +20,11 @@ class BoxFrame {
 class RedSquare {
   unsigned int *frame_data;
 
+  size_t redBoxLeft;
+  size_t redBoxRight;
+  size_t redBoxTop;
+  size_t redBoxBottom;
+
   size_t leftWall;
   size_t rightWall;
   size_t topWall;
@@ -26,11 +33,15 @@ class RedSquare {
   static const size_t width = 1920;
   static const size_t height = 1080;
 
+  private:
+  void findBox(unsigned int *frame_data);
+
   public:
   size_t leftPos;
   size_t rightPos;
   size_t topPos;
   size_t bottomPos;
+
   void draw();
   void drawSquare();
   bool moveLeft(libfreenect2::Frame *color);

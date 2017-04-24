@@ -29,6 +29,7 @@
 #include <libfreenect2/registration.h>
 #include <libfreenect2/packet_pipeline.h>
 #include <libfreenect2/logger.h>
+#include <math.h>
 #include "viewer.h"
 #include "Calibration.h"
 // Whether the running application should shut down.
@@ -178,14 +179,19 @@ int main(int argc, char *argv[]) {
   libfreenect2::Frame red(1920, 1080, 4, NULL);
   unsigned int *frame_data = (unsigned int*)red.data;
 
-  size_t wConst = 1920 / 512;
-  size_t hConst = 1080 / 424;
+  float wConst = 1920.0 / 512.0;
+  float hConst = 1080.0 / 424.0;
+
+  float tLeft = floor(calibrator.left_wall * wConst);
+  float tRight = floor(calibrator.right_wall * wConst);
+  float tTop = floor(calibrator.top_wall * hConst);
+  float tBot = floor(calibrator.bottom_wall * hConst);
 
   RedSquare redSquare(
-      calibrator.left_wall * wConst,
-      calibrator.right_wall * wConst,
-      calibrator.top_wall * hConst,
-      calibrator.bottom_wall * hConst,
+      static_cast <size_t> (tLeft),
+      static_cast <size_t> (tRight),
+      static_cast <size_t> (tTop),
+      static_cast <size_t> (tBot),
       frame_data);
 
   redSquare.drawSquare();
@@ -195,6 +201,9 @@ int main(int argc, char *argv[]) {
   protonect_shutdown = protonect_shutdown || viewer.render();
 
   libfreenect2::Frame *color;
+
+  int pause;
+  std::cin >> pause;
 
   while(!protonect_shutdown) {
     if (!listener.waitForNewFrame(frames, 10*1000)) {
@@ -217,7 +226,7 @@ int main(int argc, char *argv[]) {
     break;
   }
 
-  printf("L: %zu R: %zu T: %zu B: %zu", redSquare.leftPos, redSquare.rightPos, redSquare.topPos, redSquare.bottomPos);
+  printf("L: %zu R: %zu T: %zu B: %zu\n", redSquare.leftPos, redSquare.rightPos, redSquare.topPos, redSquare.bottomPos);
 
   dev->stop();
   dev->close();

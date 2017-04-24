@@ -3,10 +3,14 @@
 #include "Calibration.h"
 #include "viewer.h"
 
-static float give = 40; // The amount of give before we detect a wall
+static float give = 20; // The amount of give before we detect a wall
 static int variance = 4; // How big of a square to grab 4 is an 8x8
 
 Calibrator::Calibrator(bool showViewer) {
+  top_wall = 0;
+  bottom_wall = 0;
+  left_wall = 0;
+  right_wall = 0;
   if (showViewer) {
     viewer.initialize();
   }
@@ -21,8 +25,7 @@ void Calibrator::getCenterValue(libfreenect2::Frame *depth) {
   float average = 0;
   int counter = 0;
   int missed = 0;
-
-  center_of_box = (((depth->width * depth->height) / 2) + (depth->width / 2));
+center_of_box = (((depth->width * depth->height) / 2) + (depth->width / 2));
 
   for(size_t x = (center_of_box - variance); x < (center_of_box + variance); x++) {
     for(size_t y = (x - (depth->width * variance)); y < (x + (depth->width * variance)); y+= depth->width) {
@@ -81,7 +84,6 @@ void Calibrator::calibrate(libfreenect2::Frame *depth) {
       break;
     }
   }
-
   printf("L: %zu R: %zu T: %zu B: %zu\n", left_wall, right_wall, top_wall, bottom_wall);
 }
 
@@ -161,6 +163,7 @@ void RedSquare::drawSquare() {
 }
 
 bool RedSquare::moveLeft(libfreenect2::Frame *color) {
+  findBox((unsigned int*) color->data);
   if (leftPos == 0) return false;
   leftPos--;
   draw();
@@ -186,4 +189,67 @@ bool RedSquare::moveDown(libfreenect2::Frame *color) {
   bottomPos++;
   draw();
   return true;
+}
+
+void RedSquare::findBox(unsigned int *frame_data) {
+  size_t red_center;
+  size_t temp;
+
+  for (size_t i = ((topWall + 1) * width); i < (bottomWall * width); i+= width) {
+    for (size_t j = leftWall + 1; j < rightWall; j++) {
+      if (isRed(frame_data[i + j])) {
+        red_center = i + j;
+      }
+    }
+  }
+
+  red_center += (5 * 1919);
+
+  temp = red_center;
+  while (true) {
+    temp--;
+    if (isRed(frame_data[temp])) {
+      redBoxLeft = temp % 1920;
+      break;
+    }
+  }
+
+  temp = red_center;
+  while (true) {
+    temp++;
+    if (isRed(frame_data[temp])) {
+      redBoxRight = temp % 1920;
+      break;
+    }
+  }
+
+  temp = red_center;
+  while (true) {
+    temp-= 1920;
+    if (isRed(frame_data[temp])) {
+      redBoxTop = temp / 1920;
+      break;
+    }
+  }
+
+  temp = red_center;
+  while (true) {
+    temp+= 1920;
+    if (isRed(frame_data[temp])) {
+      redBoxBottom = temp / 1920; 
+      break;
+    }
+  }
+
+
+  printf("Center: %zu %zu\n", red_center % 1920, red_center / 1920);
+  printf("L: %zu R: %zu T: %zu B: %zu\n", leftWall, rightWall, topWall, bottomWall);
+  printf("L: %zu R: %zu T: %zu B: %zu\n", redBoxLeft, redBoxRight, redBoxTop, redBoxBottom);
+}
+
+bool isRed(unsigned int pixel) {
+  unsigned int red = 0xDD;
+  unsigned int notRed = 0x33;
+  
+  return ((((pixel >> 16) & 0xFF) > red) && (((pixel >> 8) & 0xFF) < notRed) && ((pixel & 0xFF) < notRed));
 }
